@@ -7,9 +7,7 @@ public abstract class Piece {
     private boolean killed = false;
     private PieceColor color;
 
-    public Piece(int xPosition, int yPosition, PieceColor color){
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+    public Piece(PieceColor color){
         this.color = color;
     }
 
