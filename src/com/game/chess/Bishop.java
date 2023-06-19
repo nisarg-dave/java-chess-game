@@ -7,7 +7,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public void movePiece(Spot start, Spot end) {
-
+    public boolean canMovePiece(Spot start, Spot end) {
+        return true;
     }
 }

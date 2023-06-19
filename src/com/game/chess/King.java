@@ -6,7 +6,14 @@ public class King extends Piece {
     }
 
     @Override
-    public void movePiece(Spot start, Spot end) {
+    public boolean canMovePiece(Spot start, Spot end) {
+        if (end.getPiece().getColor() == this.getColor()) {
+            return false;
+        }
+        int x = Math.abs(start.getXPosition() - end.getXPosition());
+        int y = Math.abs(start.getYPosition() - end.getYPosition());
+
+        return x + y == 1;
 
     }
 }

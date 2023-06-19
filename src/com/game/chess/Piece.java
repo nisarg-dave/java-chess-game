@@ -21,6 +21,6 @@ public abstract class Piece {
         this.killed = true;
     }
 
-    public abstract void movePiece(Spot start, Spot end);
+    public abstract boolean canMovePiece(Spot start, Spot end);
 
 }
