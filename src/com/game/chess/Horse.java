@@ -1,13 +1,13 @@
 package com.game.chess;
 
-public class Horse extends Piece{
+public class Horse extends Piece {
 
-    public Horse (PieceColor color){
+    public Horse(PieceColor color) {
         super(color);
     }
 
     @Override
-    public void movePiece(int xPosition, int yPosition) {
+    public void movePiece(Spot start, Spot end) {
 
     }
 }
