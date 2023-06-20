@@ -3,24 +3,24 @@ package com.game.chess;
 public abstract class Piece {
 
     private boolean killed = false;
-    private PieceColor color;
+    private PieceColour colour;
 
-    public Piece(PieceColor color) {
-        this.color = color;
+    public Piece(PieceColour colour) {
+        this.colour = colour;
     }
 
     public boolean isKilled() {
         return this.killed;
     }
 
-    public PieceColor getColor() {
-        return this.color;
+    public PieceColour getColour() {
+        return this.colour;
     }
 
     public void setKilled() {
         this.killed = true;
     }
 
-    public abstract boolean canMovePiece(Spot start, Spot end);
+    public abstract void movePiece(Spot start, Spot end);
 
 }
