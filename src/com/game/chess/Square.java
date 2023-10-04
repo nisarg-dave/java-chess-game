@@ -1,17 +1,17 @@
 package com.game.chess;
 
-public class Spot {
+public class Square {
     private int xPosition;
     private int yPosition;
     private Piece piece;
 
-    public Spot(int xPosition, int yPosition, Piece piece){
+    public Square(int xPosition, int yPosition, Piece piece){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.piece = piece;
     }
 
-    public Spot(int xPosition, int yPosition){
+    public Square(int xPosition, int yPosition){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
     }

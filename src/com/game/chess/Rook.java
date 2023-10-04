@@ -7,7 +7,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void movePiece(Spot start, Spot end) {
+    public void movePiece(Square start, Square end) {
         // If end spot has piece of same colour
         if (end.getPiece().getColour() == this.getColour()) {
             return;
@@ -19,7 +19,7 @@ public class Rook extends Piece {
         if ((x + y) % 1 == 0) {
             // If there is a piece of the opposite colour, set it to killed
             if (end.getPiece() != null) {
-                end.getPiece().setKilled();
+                end.getPiece().killPiece();
             }
             end.setPiece(this);
         }

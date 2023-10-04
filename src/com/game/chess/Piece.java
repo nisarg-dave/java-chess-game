@@ -1,26 +1,30 @@
 package com.game.chess;
 
+import java.util.LinkedList;
+
 public abstract class Piece {
 
-    private boolean killed = false;
     private PieceColour colour;
+
+    private LinkedList<Piece> pieces = new LinkedList();
 
     public Piece(PieceColour colour) {
         this.colour = colour;
-    }
-
-    public boolean isKilled() {
-        return this.killed;
+        this.pieces.add(this);
     }
 
     public PieceColour getColour() {
         return this.colour;
     }
 
-    public void setKilled() {
-        this.killed = true;
+    public void killPiece() {
+        this.pieces.remove(this);
     }
 
-    public abstract void movePiece(Spot start, Spot end);
+    public LinkedList<Piece> getPieces() {
+        return this.pieces;
+    }
+
+    public abstract void movePiece(Square start, Square end);
 
 }
