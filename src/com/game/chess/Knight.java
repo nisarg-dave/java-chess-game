@@ -1,13 +1,16 @@
 package com.game.chess;
 
-public class Horse extends Piece {
+import java.util.LinkedList;
 
-    public Horse(PieceColour colour) {
-        super(colour);
+public class Knight extends Piece {
+
+    public Knight(PieceColour colour, int xPosition, int yPosition, LinkedList<Piece> pieces) {
+        super(colour, "Knight", xPosition, yPosition, pieces);
     }
 
     @Override
     public void movePiece(Square start, Square end) {
+
         // If end spot has piece of same colour
         if (end.getPiece().getColour() == this.getColour()) {
             return;

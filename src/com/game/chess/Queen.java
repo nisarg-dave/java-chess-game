@@ -1,9 +1,11 @@
 package com.game.chess;
 
+import java.util.LinkedList;
+
 public class Queen extends Piece {
 
-    public Queen(PieceColour colour) {
-        super(colour);
+    public Queen(PieceColour colour, int xPosition, int yPosition, LinkedList<Piece> pieces) {
+        super(colour, "Queen", xPosition, yPosition, pieces);
     }
 
     @Override

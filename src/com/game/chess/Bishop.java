@@ -1,9 +1,11 @@
 package com.game.chess;
 
+import java.util.LinkedList;
+
 public class Bishop extends Piece {
 
-    public Bishop(PieceColour colour) {
-        super(colour);
+    public Bishop(PieceColour colour, int xPosition, int yPosition, LinkedList<Piece> pieces) {
+        super(colour, "Bishop", xPosition, yPosition, pieces);
     }
 
     @Override

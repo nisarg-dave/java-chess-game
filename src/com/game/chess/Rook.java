@@ -1,9 +1,11 @@
 package com.game.chess;
 
+import java.util.LinkedList;
+
 public class Rook extends Piece {
 
-    public Rook(PieceColour colour) {
-        super(colour);
+    public Rook(PieceColour colour, int xPosition, int yPosition, LinkedList<Piece> pieces) {
+        super(colour, "Rook", xPosition, yPosition, pieces);
     }
 
     @Override

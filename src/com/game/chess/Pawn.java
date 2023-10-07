@@ -1,9 +1,11 @@
 package com.game.chess;
 
+import java.util.LinkedList;
+
 public class Pawn extends Piece {
 
-    public Pawn(PieceColour colour) {
-        super(colour);
+    public Pawn(PieceColour colour, int xPosition, int yPosition, LinkedList<Piece> pieces) {
+        super(colour, "Pawn", xPosition, yPosition, pieces);
     }
 
     @Override
