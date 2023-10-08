@@ -9,22 +9,23 @@ public class Knight extends Piece {
     }
 
     @Override
-    public void movePiece(Square start, Square end) {
+    public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
 
-        // If end spot has piece of same colour
-        if (end.getPiece().getColour() == this.getColour()) {
-            return;
-        }
-
-        int x = Math.abs(start.getXPosition() - end.getXPosition());
-        int y = Math.abs(start.getYPosition() - end.getYPosition());
-
-        if (x * y == 2) {
-            // If there is a piece of the opposite colour, set it to killed
-            if (end.getPiece() != null) {
-                end.getPiece().killPiece();
-            }
-            end.setPiece(this);
-        }
+//        // If end spot has piece of same colour
+//        if (end.getPiece().getColour() == this.getColour()) {
+//            return;
+//        }
+//
+//        int x = Math.abs(start.getXPosition() - end.getXPosition());
+//        int y = Math.abs(start.getYPosition() - end.getYPosition());
+//
+//        if (x * y == 2) {
+//            // If there is a piece of the opposite colour, set it to killed
+//            if (end.getPiece() != null) {
+//                end.getPiece().killPiece();
+//            }
+//            end.setPiece(this);
+//        }
+        return false;
     }
 }

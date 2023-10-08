@@ -3,12 +3,19 @@ package com.game.chess;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
 public class Board {
+    // Static means the variable belongs to the class itself rather than to any specific instance of the class. This means that there is only one copy of the variable in memory, regardless of how many instances of the class are created
+    private static LinkedList<Piece> pieces = new LinkedList<>();
+    private static Piece selectedPiece = null;
+
     public Board() throws IOException {
         BufferedImage chessPiecesImage = ImageIO.read(new File("/Users/nisarg/Developer/chess-game/src/images/ChessPieces.png"));
         Image[] img = new Image[12];
@@ -20,8 +27,6 @@ public class Board {
                 ind++;
             }
         }
-
-        LinkedList<Piece> pieces = new LinkedList<>();
 
         // Instantiate each piece and passing same instance of linkedlist to each has a reference to the same list
         Bishop wBishop1 = new Bishop(PieceColour.WHITE, 2, 7, pieces);
@@ -111,8 +116,66 @@ public class Board {
             }
         };
         frame.add(jPanel);
+        frame.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // Printing name of piece based on position of mouse
+                System.out.println(getPiece(e.getX(), e.getY()).getColour().name().toLowerCase() + " " + getPiece(e.getX(), e.getY()).getName());
+                selectedPiece = getPiece(e.getX(), e.getY());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                frame.repaint();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        frame.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (selectedPiece != null) {
+                    boolean canMove = selectedPiece.movePiece(e.getX() / 64, e.getY() / 64, pieces);
+                    if (canMove) {
+                        selectedPiece.setXPosition(e.getX() / 64);
+                        selectedPiece.setYPosition(e.getY() / 64);
+                    }
+                }
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
+    public Piece getPiece(int x, int y) {
+        int xp = x / 64;
+        int yp = y / 64;
+
+        for (Piece p : pieces) {
+            if (p.getXPosition() == xp && p.getYPosition() == yp) {
+                return p;
+            }
+        }
+        return null;
+
+    }
 }

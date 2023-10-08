@@ -29,10 +29,10 @@ public abstract class Piece {
         return this.name;
     }
 
-    public abstract void movePiece(Square start, Square end);
+    public abstract boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces);
 
-    public void killPiece() {
-        this.pieces.remove(this);
+    public void killPiece(Piece piece) {
+        this.pieces.remove(piece);
     }
 
     public LinkedList<Piece> getPieces() {
@@ -45,5 +45,13 @@ public abstract class Piece {
 
     public int getYPosition() {
         return yPosition;
+    }
+
+    public void setXPosition(int xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public void setYPosition(int yPosition) {
+        this.yPosition = yPosition;
     }
 }

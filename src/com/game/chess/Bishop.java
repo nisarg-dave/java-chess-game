@@ -9,21 +9,34 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public void movePiece(Square start, Square end) {
-        // If end spot has piece of same colour
-        if (end.getPiece().getColour() == this.getColour()) {
-            return;
+    public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
+        System.out.println(newXPosition);
+        Piece pieceInNewPosition = null;
+
+        for (Piece piece : pieces) {
+            if (piece.getXPosition() == newXPosition && piece.getYPosition() == newYPosition) {
+                pieceInNewPosition = piece;
+            }
         }
 
-        int x = Math.abs(start.getXPosition() - end.getXPosition());
-        int y = Math.abs(start.getYPosition() - end.getYPosition());
+        if (pieceInNewPosition != null) {
+            // If end spot has piece of same colour
+            if (pieceInNewPosition.getColour() == this.getColour()) {
+                return false;
+            }
+        }
+
+
+        int x = Math.abs(newXPosition - this.getXPosition());
+        int y = Math.abs(newYPosition - this.getYPosition());
 
         if (x - y == 0) {
             // If there is a piece of the opposite colour, set it to killed
-            if (end.getPiece() != null) {
-                end.getPiece().killPiece();
+            if (pieceInNewPosition != null) {
+                this.killPiece(pieceInNewPosition);
             }
-            end.setPiece(this);
+            return true;
         }
+        return false;
     }
 }
