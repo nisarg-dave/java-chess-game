@@ -125,7 +125,7 @@ public class Board {
             @Override
             public void mousePressed(MouseEvent e) {
                 // Printing name of piece based on position of mouse
-                System.out.println(getPiece(e.getX(), e.getY()).getColour().name().toLowerCase() + " " + getPiece(e.getX(), e.getY()).getName());
+//                System.out.println(getPiece(e.getX(), e.getY()).getColour().name().toLowerCase() + " " + getPiece(e.getX(), e.getY()).getName());
                 selectedPiece = getPiece(e.getX(), e.getY());
             }
 

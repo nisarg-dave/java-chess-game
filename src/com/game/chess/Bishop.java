@@ -10,10 +10,26 @@ public class Bishop extends Piece {
 
     @Override
     public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
-        System.out.println(newXPosition);
         Piece pieceInNewPosition = null;
 
+        // If there are same colour pieces in the first diagonal then return false
         for (Piece piece : pieces) {
+            // Top Left Diagonal
+            if (this.getXPosition() - 1 == piece.getXPosition() && this.getYPosition() - 1 == piece.getYPosition() && this.getColour() == piece.getColour()) {
+                return false;
+            }
+            // Top Right Diagonal
+            if (this.getXPosition() + 1 == piece.getXPosition() && this.getYPosition() - 1 == piece.getYPosition() && this.getColour() == piece.getColour()) {
+                return false;
+            }
+            // Bottom Left Diagonal
+            if (this.getXPosition() - 1 == piece.getXPosition() && this.getYPosition() + 1 == piece.getYPosition() && this.getColour() == piece.getColour()) {
+                return false;
+            }
+            // Bottom Right Diagonal
+            if (this.getXPosition() + 1 == piece.getXPosition() && this.getYPosition() + 1 == piece.getYPosition() && this.getColour() == piece.getColour()) {
+                return false;
+            }
             if (piece.getXPosition() == newXPosition && piece.getYPosition() == newYPosition) {
                 pieceInNewPosition = piece;
             }
