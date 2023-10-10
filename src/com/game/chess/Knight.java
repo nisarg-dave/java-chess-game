@@ -10,22 +10,31 @@ public class Knight extends Piece {
 
     @Override
     public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
+        Piece pieceInNewPosition = null;
 
-//        // If end spot has piece of same colour
-//        if (end.getPiece().getColour() == this.getColour()) {
-//            return;
-//        }
-//
-//        int x = Math.abs(start.getXPosition() - end.getXPosition());
-//        int y = Math.abs(start.getYPosition() - end.getYPosition());
-//
-//        if (x * y == 2) {
-//            // If there is a piece of the opposite colour, set it to killed
-//            if (end.getPiece() != null) {
-//                end.getPiece().killPiece();
-//            }
-//            end.setPiece(this);
-//        }
+        for (Piece piece : pieces) {
+            if (piece.getXPosition() == newXPosition && piece.getYPosition() == newYPosition) {
+                pieceInNewPosition = piece;
+            }
+        }
+        // If end spot has piece of same colour
+        if (pieceInNewPosition != null) {
+            // If end spot has piece of same colour
+            if (pieceInNewPosition.getColour() == this.getColour()) {
+                return false;
+            }
+        }
+
+        int x = Math.abs(newXPosition - this.getXPosition());
+        int y = Math.abs(newYPosition - this.getYPosition());
+
+        if (x * y == 2) {
+            // If there is a piece of the opposite colour, set it to killed
+            if (pieceInNewPosition != null) {
+                this.killPiece(pieceInNewPosition);
+            }
+            return true;
+        }
         return false;
     }
 }
