@@ -10,21 +10,66 @@ public class Rook extends Piece {
 
     @Override
     public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
-        // If end spot has piece of same colour
-//        if (end.getPiece().getColour() == this.getColour()) {
-//            return;
-//        }
-//
-//        int x = Math.abs(start.getXPosition() - end.getXPosition());
-//        int y = Math.abs(start.getYPosition() - end.getYPosition());
-//
-//        if ((x + y) % 1 == 0) {
-//            // If there is a piece of the opposite colour, set it to killed
-//            if (end.getPiece() != null) {
-//                end.getPiece().killPiece();
-//            }
-//            end.setPiece(this);
-//        }
+        Piece pieceInNewPosition = null;
+
+        // Stopping it from moving diagonally
+        // Top Left
+        System.out.println("Old Position: " + this.getXPosition() + "," + this.getYPosition() + "\nNew Position: " + newXPosition + "," + newYPosition);
+        if (this.getXPosition() > newXPosition && this.getYPosition() > newYPosition) {
+            return false;
+        }
+        // Bottom Left
+        if (this.getXPosition() > newXPosition && this.getYPosition() < newYPosition) {
+            return false;
+        }
+        // Top Right
+        if (this.getXPosition() < newXPosition && this.getYPosition() > newYPosition) {
+            return false;
+        }
+        // Bottom Right
+        if (this.getXPosition() < newXPosition && this.getYPosition() < newYPosition) {
+            return false;
+        }
+
+        for (Piece piece : pieces) {
+            // Moving Down
+            if (this.getYPosition() + 1 == piece.getYPosition() && this.getXPosition() == piece.getXPosition() && this.getColour() == piece.getColour() && newYPosition > this.getYPosition()) {
+                return false;
+            }
+            // Moving Up
+            if (this.getYPosition() - 1 == piece.getYPosition() && this.getXPosition() == piece.getXPosition() && this.getColour() == piece.getColour() && newYPosition < this.getYPosition()) {
+                return false;
+            }
+            // Moving Left
+            if (this.getXPosition() - 1 == piece.getXPosition() && this.getYPosition() == piece.getYPosition() && this.getColour() == piece.getColour() && newXPosition < this.getXPosition()) {
+                return false;
+            }
+            // Moving Right
+            if (this.getXPosition() + 1 == piece.getXPosition() && this.getYPosition() == piece.getYPosition() && this.getColour() == piece.getColour() && newXPosition > this.getXPosition()) {
+                return false;
+            }
+            if (piece.getXPosition() == newXPosition && piece.getYPosition() == newYPosition) {
+                pieceInNewPosition = piece;
+            }
+        }
+
+        if (pieceInNewPosition != null) {
+            // If end spot has piece of same colour
+            if (pieceInNewPosition.getColour() == this.getColour()) {
+                return false;
+            }
+        }
+
+        int x = Math.abs(newXPosition - this.getXPosition());
+        int y = Math.abs(newYPosition - this.getYPosition());
+
+        if ((x + y) % 1 == 0) {
+            // If there is a piece of the opposite colour, set it to killed
+            if (pieceInNewPosition != null) {
+                this.killPiece(pieceInNewPosition);
+            }
+            return true;
+        }
         return false;
     }
 }
