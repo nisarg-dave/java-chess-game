@@ -1,6 +1,5 @@
 package com.game.chess;
 
-import java.io.IOException;
 import java.util.LinkedList;
 
 public class King extends Piece {
@@ -10,22 +9,36 @@ public class King extends Piece {
 
     @Override
     public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
+        Piece pieceInNewPosition = null;
 
-//        // If end spot has piece of same colour
-//        if (end.getPiece().getColour() == this.getColour()) {
-//            return;
-//        }
-//
-//        int x = Math.abs(start.getXPosition() - end.getXPosition());
-//        int y = Math.abs(start.getYPosition() - end.getYPosition());
-//
-//        if (x + y == 1) {
-//            // If there is a piece of the opposite colour, set it to killed
-//            if (end.getPiece() != null) {
-//                end.getPiece().killPiece();
-//            }
-//            end.setPiece(this);
-//        }
+        for (Piece piece : pieces) {
+            if (piece.getXPosition() == newXPosition && piece.getYPosition() == newYPosition) {
+                pieceInNewPosition = piece;
+            }
+        }
+
+        if (pieceInNewPosition != null) {
+            // If end spot has piece of same colour
+            if (pieceInNewPosition.getColour() == this.getColour()) {
+                return false;
+            }
+        }
+
+        int x = Math.abs(newXPosition - this.getXPosition());
+        int y = Math.abs(newYPosition - this.getYPosition());
+
+        // Stopping King from moving more than one jumps
+        if (x > 1 || y > 1) {
+            return false;
+        }
+
+        if ((x + y == 1) || (x - y) == 0) {
+            // If there is a piece of the opposite colour, set it to killed
+            if (pieceInNewPosition != null) {
+                this.killPiece(pieceInNewPosition);
+            }
+            return true;
+        }
         return false;
     }
 }
