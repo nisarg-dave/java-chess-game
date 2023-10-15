@@ -3,7 +3,11 @@ package com.game.chess;
 import java.io.IOException;
 
 public class Game {
-    public static void main(String[] args) throws IOException {
-        Board board = new Board();
+    public static void main(String[] args) {
+        try {
+            Board board = new Board();
+        } catch (IOException e) {
+            System.err.println("An error occurred: " + e.getMessage());
+        }
     }
 }
