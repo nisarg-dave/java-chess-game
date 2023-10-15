@@ -14,7 +14,6 @@ public class Rook extends Piece {
 
         // Stopping it from moving diagonally
         // Top Left
-        System.out.println("Old Position: " + this.getXPosition() + "," + this.getYPosition() + "\nNew Position: " + newXPosition + "," + newYPosition);
         if (this.getXPosition() > newXPosition && this.getYPosition() > newYPosition) {
             return false;
         }
