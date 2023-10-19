@@ -4,50 +4,68 @@ import java.util.LinkedList;
 
 public class Bishop extends Piece {
 
+    /**
+     * Creates the Bishop piece
+     *
+     * @param colour    the colour of the Bishop
+     * @param xPosition the X position of the Bishop
+     * @param yPosition the Y position of the Bishop
+     * @param pieces    the LinkedList that contains all the pieces
+     */
     public Bishop(PieceColour colour, int xPosition, int yPosition, LinkedList<Piece> pieces) {
+        // Passes parameters to parent's constructor
         super(colour, "Bishop", xPosition, yPosition, pieces);
     }
 
+    /**
+     * Determines if the Bishop can move to the new position or not
+     *
+     * @param newXPosition the new X position of the piece
+     * @param newYPosition the new Y position of the piece
+     * @param pieces       the LinkedList that contains all the pieces
+     * @return true if it can move and false if it can't move
+     */
     @Override
     public boolean movePiece(int newXPosition, int newYPosition, LinkedList<Piece> pieces) {
         Piece pieceInNewPosition = null;
 
-        // If there are same colour pieces in the first diagonal then return false
+        // Iterate through all pieces in the LinkedList
         for (Piece piece : pieces) {
-            // Top Left Diagonal
+            // Checks if there is a piece of the same colour in the way when trying to move in the top left diagonal direction
             if (this.getXPosition() - 1 == piece.getXPosition() && this.getYPosition() - 1 == piece.getYPosition() && this.getColour() == piece.getColour() && this.getXPosition() > newXPosition && this.getYPosition() > newYPosition) {
                 return false;
             }
-            // Top Right Diagonal
+            // Checks if there is a piece of the same colour in the way when trying to move in the top right diagonal direction
             if (this.getXPosition() + 1 == piece.getXPosition() && this.getYPosition() - 1 == piece.getYPosition() && this.getColour() == piece.getColour() && this.getXPosition() < newXPosition && this.getYPosition() > newYPosition) {
                 return false;
             }
-            // Bottom Left Diagonal
+            // Checks if there is a piece of the same colour in the way when trying to move in the bottom left diagonal direction
             if (this.getXPosition() - 1 == piece.getXPosition() && this.getYPosition() + 1 == piece.getYPosition() && this.getColour() == piece.getColour() && this.getXPosition() > newXPosition && this.getYPosition() < newYPosition) {
                 return false;
             }
-            // Bottom Right Diagonal
+            // Checks if there is a piece of the same colour in the way when trying to move in the bottom right diagonal direction
             if (this.getXPosition() + 1 == piece.getXPosition() && this.getYPosition() + 1 == piece.getYPosition() && this.getColour() == piece.getColour() && this.getXPosition() < newXPosition && this.getYPosition() < newYPosition) {
                 return false;
             }
+            // Checks if there is a piece in the new position
             if (piece.getXPosition() == newXPosition && piece.getYPosition() == newYPosition) {
                 pieceInNewPosition = piece;
             }
         }
 
         if (pieceInNewPosition != null) {
-            // If end spot has piece of same colour
+            // If piece in the new position has the same colour
             if (pieceInNewPosition.getColour() == this.getColour()) {
                 return false;
             }
         }
 
-
+        // The absolute difference between new and current X and Y positions
         int x = Math.abs(newXPosition - this.getXPosition());
         int y = Math.abs(newYPosition - this.getYPosition());
 
         if (x - y == 0) {
-            // If there is a piece of the opposite colour, set it to killed
+            // If there is a piece of the opposite colour in the new position, kill the piece
             if (pieceInNewPosition != null) {
                 this.killPiece(pieceInNewPosition);
             }
