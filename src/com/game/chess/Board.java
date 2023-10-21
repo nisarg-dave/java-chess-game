@@ -28,13 +28,14 @@ public class Board {
      * @throws IOException
      */
     public Board() throws IOException {
-        // Reads image of pieces
+        // Reads image of pieces and returns a Buffered Image (contains image data such as colormodel and raster [represents a two-dimensional picture as a rectangular matrix or grid of square pixels])
         BufferedImage chessPiecesImage = ImageIO.read(new File("/Users/nisarg/Developer/chess-game/src/images/ChessPieces.png"));
         Image[] img = new Image[12];
         int ind = 0;
         // Goes across first row of image at 0 height and 200 wide and chops into smaller images and then repeats for height 200.
         for (int y = 0; y < 400; y += 200) {
             for (int x = 0; x < 1200; x += 200) {
+                // Stores a sub image at the index and scales it with higher priority to image smoothness, raster data helps with dimensions
                 img[ind] = chessPiecesImage.getSubimage(x, y, 200, 200).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
                 ind++;
             }
@@ -76,10 +77,14 @@ public class Board {
         Pawn bPawn7 = new Pawn(PieceColour.BLACK, 6, 1, pieces);
         Pawn bPawn8 = new Pawn(PieceColour.BLACK, 7, 1, pieces);
 
-        // Create a new JFrame
+        // Creates a new JFrame
+        // JFrames represents a framed window and JPanel represents an area where visuals can appear
         JFrame frame = new JFrame();
         frame.setBounds(10, 10, 515, 540);
+        // Example of an anonymous class, classes without any names used for quick implementation
         JPanel jPanel = new JPanel() {
+            // Overriding parent implementation
+
             /**
              * Creates the squares on the board and places pieces in starting position
              * @param g  the <code>Graphics</code> context in which to paint
@@ -128,13 +133,14 @@ public class Board {
                     if (p.getColour() != PieceColour.WHITE) {
                         indx += 6;
                     }
-                    // Draw the images
+                    // Draw the images, observer is the object that is notified as more of the image is converted.
                     g.drawImage(img[indx], p.getXPosition() * 64, p.getYPosition() * 64, this);
                 }
             }
         };
         // Add a jPanel
         frame.add(jPanel);
+        // MouseListener is an interface, and we are creating an anonymous inner class that implements the interface.
         frame.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -188,6 +194,7 @@ public class Board {
             public void mouseMoved(MouseEvent e) {
             }
         });
+        // Exit the application using System Exit
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
